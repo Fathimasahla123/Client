@@ -1,0 +1,123 @@
+@import 'variables';
+@import 'mixins';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $primary-font;
+  background-color: $secondary-color;
+  color: $dark-color;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.page {
+  min-height: calc(100vh - 120px);
+  padding: $spacing-lg 0;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: $spacing-md;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+// Forms
+.form-group {
+  margin-bottom: $spacing-md;
+
+  label {
+    display: block;
+    margin-bottom: $spacing-sm;
+    font-weight: 600;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: $spacing-sm;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+}
+
+.btn {
+  @include button-style;
+}
+
+.btn-secondary {
+  background-color: $accent-color;
+  color: $dark-color;
+
+  &:hover {
+    background-color: darken($accent-color, 10%);
+  }
+}
+
+// Cards
+.card {
+  @include card-style;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-md;
+}
+
+// Alerts
+.alert {
+  padding: $spacing-md;
+  border-radius: 4px;
+  margin-bottom: $spacing-md;
+
+  &-success {
+    background-color: lighten($success-color, 40%);
+    color: darken($success-color, 20%);
+  }
+
+  &-error {
+    background-color: lighten($danger-color, 40%);
+    color: darken($danger-color, 20%);
+  }
+}
+
+// Responsive
+@include responsive($breakpoint-md) {
+  .container {
+    padding: 0 $spacing-lg;
+  }
+}

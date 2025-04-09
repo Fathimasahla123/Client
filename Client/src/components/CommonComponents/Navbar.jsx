@@ -1,48 +1,79 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const { user, logout, isAuthenticated } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
-
+const Navbar = ({ user, onLogout }) => {
   return (
-    <nav className="navbar">
-      <div className="container">
-        <Link to="/" className="logo">
-          Restaurant Name
-        </Link>
-        
-        <div className="nav-links">
-          <Link to="/menu">Menu</Link>
-          <Link to="/staff">Our Staff</Link>
-          
-          {isAuthenticated() ? (
-            <>
-              {user.role === 'Customer' && <Link to="/customer">Dashboard</Link>}
-              {user.role === 'Admin' && <Link to="/admin">Admin Panel</Link>}
-              {user.role === 'Staff' && <Link to="/staff-dashboard">Staff Dashboard</Link>}
-              <button onClick={handleLogout} className="btn btn-secondary">
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="btn">
-                Login
-              </Link>
-              <Link to="/signup" className="btn btn-secondary">
-                Sign Up
-              </Link>
-            </>
-          )}
-        </div>
-      </div>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/dashboard"> Dashboard </Link>
+        </li>
+
+        {/* Admin Navigation */}
+
+        {user?.role === "Admin" && (
+          <>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Link to="/orders">Orders</Link>
+            </li>
+            <li>
+              <Link to="/reservations">Reservations</Link>
+            </li>
+            <li>
+              <Link to="/products">Products</Link>
+            </li>
+            <li>
+              <Link to="/analytic">Analytic</Link>
+            </li>
+            <li>
+              <Link to="/feedback">Feedback</Link>
+            </li>
+          </>
+        )}
+
+        {/* Student Navigation */}
+        {user?.role === "Customer" && (
+          <>
+            <li>
+              <Link to="/view-profile">View Profile</Link>
+            </li>
+            <li>
+              <Link to="/update-profile">Update Profile</Link>
+            </li>
+            <li>
+              <Link to="/update-profile-picture">Update Profile Picture</Link>
+            </li>
+            <li>
+              <Link to="/order-details">View Orders</Link>
+            </li>
+            <li>
+              <Link to="/submit-feedback">Submit Feedback</Link>
+            </li>
+            <li>
+              <Link to="/feedback">View Feedback</Link>
+            </li>
+          </>
+        )}
+
+        {/* Trainer Navigation */}
+        {user?.role === "Staff" && (
+          <>
+            <li>
+              <Link to="/view-orders">View Orders</Link>
+            </li>
+            <li>
+              <Link to="/received-feedback">Received Feedback & Ratings</Link>
+            </li>
+          </>
+        )}
+
+        <li>
+          <button onClick={onLogout}>Logout</button>
+        </li>
+      </ul>
     </nav>
   );
 };

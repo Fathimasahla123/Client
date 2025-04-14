@@ -6,7 +6,7 @@ const Navbar = ({ user, onLogout }) => {
     <nav>
       <ul>
         <li>
-          <Link to="/dashboard"> Dashboard </Link>
+          <Link to="/adminDashboard"> Dashboard </Link>
         </li>
 
         {/* Admin Navigation */}
@@ -29,7 +29,7 @@ const Navbar = ({ user, onLogout }) => {
               <Link to="/analytic">Analytic</Link>
             </li>
             <li>
-              <Link to="/feedback">Feedback</Link>
+              <Link to="/staffs">Staffs</Link>
             </li>
           </>
         )}
@@ -72,6 +72,7 @@ const Navbar = ({ user, onLogout }) => {
 
         <li>
           <button onClick={onLogout}>Logout</button>
+      
         </li>
       </ul>
     </nav>

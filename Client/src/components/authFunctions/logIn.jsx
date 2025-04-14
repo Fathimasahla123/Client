@@ -19,21 +19,38 @@ const Login = ({ onLogin }) => {
     try {
       const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
       const response = await axios.post(`${apiUrl}/api/auth/login`,formData); 
-      //const response = await axios.post(`${apiUrl}/api/auth/login`, formData);
+      
       const { token, user } = response.data;
 
       if (response.data.success) {
+        if (user.role === 'Admin') {
         navigate("/adminDashboard"); // Redirect after successful login
-      } else {
+      }
+     } else {
         setError(response.data.message || "Login failed");
       }
+      // if (response.data.success) {
+      //   const { token, user } = response.data;
+      //   localStorage.setItem('authToken', token); // Store token
+      //   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      //   if (user.role === 'Admin') {
+      //     navigate("/adminDashboard");
+      //   } else {
+      //     navigate("/login"); // Or other appropriate route for non-admins
+      //   }
+      // } else {
+      //   setError(response.data.message || "Login failed");
+      // }
+
+      
 
       if (token && user) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         onLogin(user, token);
+        //localStorage.setItem('authToken', token);
       } else {
         setError("Invalid email or password");
-      }
+     }
     } catch (error) {
       console.error("Login error:", error);
       setError(

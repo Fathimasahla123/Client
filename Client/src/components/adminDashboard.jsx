@@ -1,129 +1,130 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import UsersManagement from './AdminFunctions/usersManagement';
-import StaffManagement from './AdminFunctions/staffManagement';
-import OrdersManagement from './AdminFunctions/ordersManagement';
-import ReservationsManagement from './AdminFunctions/reservationManagement';
-import AnalyticsDashboard from './AdminFunctions/analyticDasboard';
-import ProductsManagement from './AdminFunctions/productsManagement';
+// import { useState, useEffect } from 'react';
+// import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import UsersManagement from './AdminFunctions/usersManagement';
+// import StaffManagement from './AdminFunctions/staffManagement';
+// import OrdersManagement from './AdminFunctions/ordersManagement';
+// import ReservationsManagement from './AdminFunctions/reservationManagement';
+// import AnalyticsDashboard from './AdminFunctions/analyticDasboard';
+// import ProductsManagement from './AdminFunctions/productsManagement';
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5001/api",
-  withCredentials: true,
-});
+// const api = axios.create({
+//   baseURL: import.meta.env.VITE_API_URL || "http://localhost:5001",
+//   withCredentials: true,
+// });
 
-const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [quickStats, setQuickStats] = useState(null);
-  const navigate = useNavigate();
+// const AdminDashboard = () => {
+//   const [activeTab, setActiveTab] = useState('dashboard');
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [quickStats, setQuickStats] = useState(null);
+//   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch user data
-        const userResponse = await api.get('/admin/add-user');
-        if (userResponse.data.role !== 'Admin') {
-          navigate('/adminDasboard');
-          return;
-        }
-        setUser(userResponse.data);
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         // Fetch user data
+//         const userResponse = await api.get('/api/admin/add-user');
+//         if (userResponse.data.role !== 'Admin') {
+//           navigate('/');
+//           return;
+//         }
+//         setUser(userResponse.data);
 
-        // Fetch dashboard data
-        const dashboardResponse = await api.get('/admin/adminDashboard');
-        setQuickStats(dashboardResponse.data.quickStats);
-      } catch (err) {
-        setError(err.response?.data?.message || 'Failed to load dashboard');
-        navigate('/login');
-      } finally {
-        setLoading(false);
-      }
-    };
+//         // Fetch dashboard data
+//         const dashboardResponse = await api.get('/api/admin/adminDashboard');
+//         setQuickStats(dashboardResponse.data.quickStats);
+//       } catch (err) {
+//         setError(err.response?.data?.message || 'Failed to load dashboard');
+//         navigate('/login');
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-    fetchData();
-  }, [navigate]);
+//     fetchData();
+//   }, [navigate]);
 
-  const handleLogout = async () => {
-    try {
-      await api.post('/auth/logout');
-      navigate('/login');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Logout failed');
-    }
-  };
+//   const handleLogout = async () => {
+//     try {
+//       await api.post('/api/auth/logout');
+//       navigate('/login');
+//     } catch (err) {
+//       setError(err.response?.data?.message || 'Logout failed');
+//     }
+//   };
 
-  if (loading) {
-    return <div className="loading">Loading dashboard...</div>;
-  }
+//   if (loading) {
+//     return <div className="loading">Loading dashboard...</div>;
+//   }
 
-  if (error) {
-    return (
-      <div className="error">
-        <p>{error}</p>
-        <button onClick={() => window.location.reload()}>Retry</button>
-      </div>
-    );
-  }
+//   if (error) {
+//     return (
+//       <div className="error">
+//         <p>{error}</p>
+//         <button onClick={() => window.location.reload()}>Retry</button>
+//       </div>
+//     );
+//   }
 
-  return (
-    <div className="admin-container">
-      <nav className="admin-sidebar">
-        <div className="admin-profile">
-          <h3>Admin Dashboard</h3>
-          <p>Welcome, {user?.name}</p>
-          {quickStats && (
-            <div className="quick-stats">
-              <div>Users: {quickStats.totalUsers}</div>
-              <div>Staff: {quickStats.totalStaff}</div>
-              <div>Orders: {quickStats.totalOrders}</div>
-              <div>Reservations: {quickStats.totalReservations}</div>
-              <div>Products: {quickStats.totalProducts}</div>
-            </div>
-          )}
-        </div>
+//   return (
+//     <div className="admin-container">
+//       <nav className="admin-sidebar">
+//         <div className="admin-profile">
+//           <h3>Admin Dashboard</h3>
+//           <p>Welcome, {user?.name}</p>
+//           {quickStats && (
+//             <div className="quick-stats">
+//               <div>Users: {quickStats.totalUsers}</div>
+//               <div>Staff: {quickStats.totalStaff}</div>
+//               <div>Orders: {quickStats.totalOrders}</div>
+//               <div>Reservations: {quickStats.totalReservations}</div>
+//               <div>Products: {quickStats.totalProducts}</div>
+//             </div>
+//           )}
+//         </div>
 
-        <ul className="admin-menu">
-          {[
-            { path: '', icon: 'tachometer-alt', label: 'Dashboard', key: 'dashboard' },
-            { path: 'users', icon: 'users', label: 'Users', key: 'users' },
-            { path: 'staff', icon: 'user-tie', label: 'Staff', key: 'staff' },
-            { path: 'orders', icon: 'shopping-cart', label: 'Orders', key: 'orders' },
-            { path: 'reservations', icon: 'calendar-alt', label: 'Reservations', key: 'reservations' },
-            { path: 'products', icon: 'utensils', label: 'Products', key: 'products' },
-            { path: 'analytics', icon: 'chart-line', label: 'Analytics', key: 'analytics' },
-          ].map((item) => (
-            <li key={item.key} className={activeTab === item.key ? 'active' : ''}>
-              <Link to={`/admin/${item.path}`} onClick={() => setActiveTab(item.key)}>
-                <i className={`fas fa-${item.icon}`}></i> {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+//         <ul className="admin-menu">
+//           {[
+//             { path: '', icon: 'tachometer-alt', label: 'Dashboard', key: 'dashboard' },
+//             { path: 'users', icon: 'users', label: 'Users', key: 'users' },
+//             { path: 'staff', icon: 'user-tie', label: 'Staff', key: 'staff' },
+//             { path: 'orders', icon: 'shopping-cart', label: 'Orders', key: 'orders' },
+//             { path: 'reservations', icon: 'calendar-alt', label: 'Reservations', key: 'reservations' },
+//             { path: 'products', icon: 'utensils', label: 'Products', key: 'products' },
+//             // { path: 'analytics', icon: 'chart-line', label: 'Analytics', key: 'analytics' },
+//           ].map((item) => (
+//             <li key={item.key} className={activeTab === item.key ? 'active' : ''}>
+//               <Link to={`/admin/${item.path}`} onClick={() => setActiveTab(item.key)}>
+//                 <i className={`fas fa-${item.icon}`}></i> {item.label}
+//               </Link>
+//             </li>
+//           ))}
+//         </ul>
 
-        <button className="logout-btn" onClick={handleLogout}>
-          <i className="fas fa-sign-out-alt"></i> Logout
-        </button>
-      </nav>
+//         <button className="logout-btn" onClick={handleLogout}>
+//           <i className="fas fa-sign-out-alt"></i> Logout
+//         </button>
+//       </nav>
 
-      <main className="admin-content">
-        <Routes>
-          <Route path="/" element={<AnalyticsDashboard api={api} />} />
-          <Route path="/users" element={<UsersManagement api={api} />} />
-          <Route path="/staff" element={<StaffManagement api={api} />} />
-          <Route path="/orders" element={<OrdersManagement api={api} />} />
-          <Route path="/reservations" element={<ReservationsManagement api={api} />} />
-          <Route path="/products" element={<ProductsManagement api={api} />} />
-          <Route path="/analytics" element={<AnalyticsDashboard api={api} />} />
-        </Routes>
-      </main>
-    </div>
-  );
-};
+//       <main className="admin-content">
+//         <Routes>
+//         <Route index element={<AnalyticsDashboard api={api} />} />
+//           {/* <Route path="/" element={<AdminDashboard api={api} />} /> */}
+//           <Route path="users" element={<UsersManagement api={api} />} />
+//           <Route path="staff" element={<StaffManagement api={api} />} />
+//           <Route path="orders" element={<OrdersManagement api={api} />} />
+//           <Route path="reservations" element={<ReservationsManagement api={api} />} />
+//           <Route path="products" element={<ProductsManagement api={api} />} />
+//           {/* <Route path="analytics" element={<AnalyticsDashboard api={api} />} /> */}
+//         </Routes>
+//       </main>
+//     </div>
+//   );
+// };
 
-export default AdminDashboard;
+// export default AdminDashboard;
 
 // // Wrapper component to provide Router context
 // export default function AdminDashboardWrapper() {
@@ -270,4 +271,21 @@ export default AdminDashboard;
 
 // export default AdminDashboard;
 
+import React from 'react';
+
+function AdminDashboard({ user }) {
+  return (
+    <div className="dashboard">
+      <h2>Welcome Admin, {user.name}</h2>
+      <div className="dashboard-stats">
+        
+      </div>
+
+    </div>
+    
+  );
+}
+
+
+export default AdminDashboard;
 

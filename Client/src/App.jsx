@@ -199,7 +199,7 @@ import Reservations from "./components/AdminFunctions/reservationManagement";
 import Analytic from "./components/AdminFunctions/analyticDasboard";
 import LandingPage from "./components/LandingPage";
 import ProfileImageUpload from "./components/CustomerFunctions/customerProfile";
-import ProductManagement from "./components/AdminFunctions/productsManagement";
+import Products from "./components/AdminFunctions/productsManagement";
 import CustomerLogin from "./components/CustomerFunctions/customerLogin";
 import ChangePassword from "./components/CustomerFunctions/changePassword";
 import OrderDetails from "./components/CustomerFunctions/customerOrders";
@@ -264,12 +264,12 @@ function App() {
 
         {/* Dashboard Routes */}
         <Route
-          path="/adminDashboard"
-          element={isAuthenticated && user?.role === "Admin" ? <AdminDashboard user={user} /> : <Navigate to="/adminDahboard" />}
+          path="/adminDashboard/*"
+          element={isAuthenticated && user?.role === "Admin" ? <AdminDashboard user={user} /> : <Navigate to="/adminDashboard" />}
         />
         <Route
           path="/customerDashboard"
-          element={isAuthenticated && user?.role === "Customer" ? <CustomerDashboard user={user} /> : <Navigate to="/login" />}
+          element={isAuthenticated && user?.role === "Customer" ? <CustomerDashboard user={user} /> : <Navigate to="/customerDashboard" />}
         />
         <Route
           path="/staffDashboard"
@@ -279,28 +279,28 @@ function App() {
         {/* Admin Only Routes */}
       
         <Route
-          path="/users"
+          path="users"
           element={isAuthenticated && user?.role === "Admin" ? <Users /> : <Navigate to="/adminDashboard" />}
         />
         <Route
-          path="/staffs"
+          path="staffs"
           element={isAuthenticated && user?.role === "Admin" ? <Staffs /> : <Navigate to="/adminDashboard" />}
         />
         <Route
-          path="/orders"
+          path="orders"
           element={isAuthenticated && user?.role === "Admin" ? <Orders /> : <Navigate to="/adminDashboard" />}
         />
         <Route
-          path="/reservations"
+          path="reservations"
           element={isAuthenticated && user?.role === "Admin" ? <Reservations /> : <Navigate to="/adminDashboard" />}
         />
         <Route
-          path="/analytic"
+          path="analytic"
           element={isAuthenticated && user?.role === "Admin" ? <Analytic /> : <Navigate to="/adminDashboard" />}
         />
         <Route
-          path="/product-management"
-          element={isAuthenticated && user?.role === "Admin" ? <ProductManagement /> : <Navigate to="/adminDashboard" />}
+          path="products"
+          element={isAuthenticated && user?.role === "Admin" ? <Products/> : <Navigate to="/adminDashboard" />}
         />
        
 

@@ -191,18 +191,18 @@ import Signup from "./components/AuthFunctions/signUp";
 import Navbar from "./components/CommonComponents/Navbar";
 import Users from "./components/AdminFunctions/usersManagement";
 import Staffs from "./components/AdminFunctions/staffManagement";
-import AdminDashboard from "./components/adminDashboard";
+import AdminDashboard from "./components/AdminFunctions/adminDashboard";
 import CustomerDashboard from "./components/CustomerFunctions/customerDashboard"
 import StaffDashboard from "./components/StaffFunctions/staffDashboard"; // Added Trainer Dashboard
 import Orders from "./components/AdminFunctions/ordersManagement";
 import Reservations from "./components/AdminFunctions/reservationManagement";
 import Analytic from "./components/AdminFunctions/analyticDasboard";
 import LandingPage from "./components/LandingPage";
-import ProfileImageUpload from "./components/CustomerFunctions/customerProfile";
+import Profile from "./components/CustomerFunctions/customerProfile";
 import Products from "./components/AdminFunctions/productsManagement";
-import CustomerLogin from "./components/CustomerFunctions/customerLogin";
-import ChangePassword from "./components/CustomerFunctions/changePassword";
-import OrderDetails from "./components/CustomerFunctions/customerOrders";
+//import CustomerLogin from "./components/CustomerFunctions/customerLogin";
+import Reservation from "./components/CustomerFunctions/customerReservation";
+import Order from "./components/CustomerFunctions/customerOrders";
 import Feedbacks from "./components/CustomerFunctions/customerFeedback";
 import StaffLogin from "./components/StaffFunctions/staffLogin";
 import ViewOrders from "./components/StaffFunctions/staffOrders";
@@ -264,7 +264,7 @@ function App() {
 
         {/* Dashboard Routes */}
         <Route
-          path="/adminDashboard/*"
+          path="/adminDashboard"
           element={isAuthenticated && user?.role === "Admin" ? <AdminDashboard user={user} /> : <Navigate to="/adminDashboard" />}
         />
         <Route
@@ -305,21 +305,21 @@ function App() {
        
 
         {/* Customer Only Routes */}
-        <Route
+        {/* <Route
           path="/customer-login"
           element={isAuthenticated && user?.role === "Customer" ? <CustomerLogin /> : <Navigate to="/customerDashboard" />}
+        /> */}
+        <Route
+          path="/profile"
+          element={isAuthenticated && user?.role === "Customer" ? <Profile/> : <Navigate to="/customerDashboard" />}
         />
         <Route
-          path="/change-password"
-          element={isAuthenticated && user?.role === "Customer" ? <ChangePassword /> : <Navigate to="/customerDashboard" />}
-        />
-        <Route
-          path="/customer-profile"
-          element={isAuthenticated && user?.role === "Customer" ? <ProfileImageUpload /> : <Navigate to="/customerDashboard" />}
+          path="/order"
+          element={isAuthenticated && user?.role === "Customer" ? <Order  /> : <Navigate to="/customerDashboard" />}
         />
          <Route
-          path="/order-details"
-          element={isAuthenticated && user?.role === "Customer" ? <OrderDetails /> : <Navigate to="/customerDashboard" />}
+          path="/reservation"
+          element={isAuthenticated && user?.role === "Customer" ? <Reservation /> : <Navigate to="/customerDashboard" />}
         />
         <Route
           path="/feedbacks"

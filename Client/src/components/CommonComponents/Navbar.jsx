@@ -5,14 +5,15 @@ const Navbar = ({ user, onLogout }) => {
   return (
     <nav>
       <ul>
-        <li>
-          <Link to="/adminDashboard"> Dashboard </Link>
-        </li>
+       
 
         {/* Admin Navigation */}
 
         {user?.role === "Admin" && (
           <>
+           <li>
+          <Link to="/adminDashboard"> Dashboard </Link>
+        </li>
             <li>
               <Link to="/users">Users</Link>
             </li>
@@ -37,23 +38,20 @@ const Navbar = ({ user, onLogout }) => {
         {/* Student Navigation */}
         {user?.role === "Customer" && (
           <>
+           <li>
+          <Link to="/customerDashboard"> Dashboard </Link>
+        </li>
             <li>
-              <Link to="/view-profile">View Profile</Link>
+              <Link to="/profile"> Profile</Link>
             </li>
             <li>
-              <Link to="/update-profile">Update Profile</Link>
+              <Link to="/order">Order</Link>
             </li>
             <li>
-              <Link to="/update-profile-picture">Update Profile Picture</Link>
+              <Link to="/reservation">Reservation</Link>
             </li>
             <li>
-              <Link to="/order-details">View Orders</Link>
-            </li>
-            <li>
-              <Link to="/submit-feedback">Submit Feedback</Link>
-            </li>
-            <li>
-              <Link to="/feedback">View Feedback</Link>
+              <Link to="/feedbacks">Feedbacks</Link>
             </li>
           </>
         )}

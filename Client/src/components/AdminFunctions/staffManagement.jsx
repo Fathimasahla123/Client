@@ -34,13 +34,12 @@ const StaffManagement = () => {
         },
       });
       
-      setStaffs(response.data.staff || response.data);
+      setStaffs(response.data.data || response.data);
       setLoading(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
       if (err.response?.status === 401) {
-        // Handle unauthorized (token expired/invalid)
         localStorage.removeItem("token");
         navigate("/adminDahboard"); // Assuming you have access to navigate
         setError("Session expired. Please login again.");

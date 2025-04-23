@@ -1,213 +1,32 @@
-// import {
-//   BrowserRouter,
-//   Routes,
-//   Route,
-//   Navigate,
-//   Outlet,
-// } from "react-router-dom";
-// import { AuthProvider } from "./components/context/authContext";
-// import { CustomerProvider } from "./components/context/customerContext";
-// import { StaffProvider } from "./components/context/staffContext";
-// //import { useAuth, useCustomer, useStaff } from "./hooks/useAuth"; // Make sure these hooks exist
-
-// import Navbar from "./components/CommonComponents/Navbar";
-// import Footer from "./components/CommonComponents/footer";
-// import Home from "./components/CommonComponents/home";
-// import Menu from "./components/CommonComponents/menu";
-// import StaffPage from "./pages/staff";
-// import Login from "./components/AuthFunctions/logIn";
-// import Signup from "./components/AuthFunctions/signUp";
-
-// // Layout Components
-// import AdminLayout from "./components/LayoutComponents/adminLayout";
-// import CustomerLayout from "./components/LayoutComponents/customerLayout";
-// import StaffLayout from "./components/LayoutComponents/staffLayout";
-// import PublicLayout from "./components/LayoutComponents/publicLayout";
-
-// // // Auth Components
-// // import AdminLogin from "./components/AuthFunctions/logIn";
-// // //import AdminSignup from "./components/AuthFunctions/signUp";
-// import CustomerLogin from "./components/CustomerFunctions/customerLogin";
-// // import AdminSignup from './components/AuthFunctions/signUp'
-// import StaffLogin from "./components/StaffFunctions/staffLogin";
-// import ChangePassword from "./components/CustomerFunctions/changePassword";
-
-// // Admin Components
-// import AdminDashboard from "./components/AdminFunctions/adminDashboard";
-// import UserManagement from "./components/AdminFunctions/usersManagement";
-// import StaffManagement from "./components/AdminFunctions/staffManagement";
-// import OrderManagement from "./components/AdminFunctions/ordersManagement";
-// import ReservationManagement from "./components/AdminFunctions/reservationManagement";
-// import ProductManagement from "./components/AdminFunctions/productsManagement";
-// import AnalyticsDashboard from "./components/AdminFunctions/analyticDasboard";
-
-// // Customer Components
-// import CustomerDashboard from "./components/CustomerFunctions/customerDashboard";
-// import CustomerProfile from "./components/CustomerFunctions/customerProfile";
-// import CustomerOrders from "./components/CustomerFunctions/customerOrders";
-// import CustomerFeedback from "./components/CustomerFunctions/customerFeedback";
-// //import Menu from "./components/CommonComponents/menu";
-// import Reservations from "./components/CustomerFunctions/reservationForm";
-
-// // Staff Components
-// import StaffDashboard from "./components/StaffFunctions/staffDashboard";
-// import StaffOrders from "./components/StaffFunctions/staffOrders";
-// import StaffFeedback from "./components/StaffFunctions/staffFeedback";
-
-// // Common Components
-// import HomePage from "./components/CommonComponents/home";
-// import NotFound from "./components/CommonComponents/notFound";
-// import LoadingSpinner from "./components/CommonComponents/loadingSpinner";
-// import "./App.css";
-// import "./styles/admin.css";
-// import "./styles/auth.css";
-// import "./styles/common.css";
-// import "./styles/customer.css";
-// import "./styles/layout.css";
-// import "./styles/staff.css";
-// import "./main.css";
-
-// // [Your other imports remain the same...]
-
-// const ProtectedRoute = ({ role, children }) => {
-//   const { user: admin, loading: adminLoading } = useAuth();
-//   const { customer, loading: customerLoading } = useCustomer();
-//   const { staff, loading: staffLoading } = useStaff();
-
-//   if (adminLoading || customerLoading || staffLoading) {
-//     return <LoadingSpinner fullPage />;
-//   }
-
-//   if (role === "Admin" && (!admin || admin.role !== "Admin")) {
-//     return <Navigate to="/login" replace />;
-//   }
-
-//   if (role === "Customer" && (!customer || customer.role !== "Customer")) {
-//     return <Navigate to="/customer/login" replace />;
-//   }
-
-//   if (role === "Staff" && (!staff || staff.role !== "Staff")) {
-//     return <Navigate to="/staff/login" replace />;
-//   }
-
-//   return children ? children : <Outlet />;
-// };
-
-// const App = () => {
-//   return (
-//     <BrowserRouter>
-//       <AuthProvider>
-//         <CustomerProvider>
-//           <StaffProvider>
-//             <div className="app">
-//               <Navbar />
-//               <main className="container">
-//                 <Routes>
-//                   {/* Public Routes */}
-//                   <Route path="/" element={<HomePage />} />
-//                   <Route path="/menu" element={<Menu />} />
-//                   <Route path="/staff" element={<StaffPage />} />
-//                   <Route path="/login" element={<Login />} />
-//                   <Route path="/signup" element={<Signup />} />
-//                   <Route path="/customer/login" element={<CustomerLogin />} />
-//                   <Route path="/staff/login" element={<StaffLogin />} />
-//                   <Route path="/change-password" element={<ChangePassword />} />
-
-//                   {/* Admin Routes */}
-//                   <Route
-//                     path="/admin"
-//                     element={
-//                       <ProtectedRoute role="Admin">
-//                         <AdminLayout />
-//                       </ProtectedRoute>
-//                     }
-//                   >
-//                     <Route index element={<AdminDashboard />} />
-//                     <Route path="dashboard" element={<AdminDashboard />} />
-//                     <Route path="users" element={<UserManagement />} />
-//                     <Route path="staff" element={<StaffManagement />} />
-//                     <Route path="orders" element={<OrderManagement />} />
-//                     <Route
-//                       path="reservations"
-//                       element={<ReservationManagement />}
-//                     />
-//                     <Route path="products" element={<ProductManagement />} />
-//                     <Route path="analytics" element={<AnalyticsDashboard />} />
-//                   </Route>
-
-//                   {/* Customer Routes */}
-//                   <Route
-//                     path="/customer"
-//                     element={
-//                       <ProtectedRoute role="Customer">
-//                         <CustomerLayout />
-//                       </ProtectedRoute>
-//                     }
-//                   >
-//                     <Route index element={<CustomerDashboard />} />
-//                     <Route path="dashboard" element={<CustomerDashboard />} />
-//                     <Route path="profile" element={<CustomerProfile />} />
-//                     <Route path="orders" element={<CustomerOrders />} />
-//                     <Route path="feedback" element={<CustomerFeedback />} />
-//                     <Route path="reservations" element={<Reservations />} />
-//                   </Route>
-
-//                   {/* Staff Routes */}
-//                   <Route
-//                     path="/staff-dashboard" // Changed from '/staff' to avoid conflict
-//                     element={
-//                       <ProtectedRoute role="Staff">
-//                         <StaffLayout />
-//                       </ProtectedRoute>
-//                     }
-//                   >
-//                     <Route index element={<StaffDashboard />} />
-//                     <Route path="dashboard" element={<StaffDashboard />} />
-//                     <Route path="orders" element={<StaffOrders />} />
-//                     <Route path="feedback" element={<StaffFeedback />} />
-//                   </Route>
-
-//                   {/* Fallback Routes */}
-//                   <Route path="/404" element={<NotFound />} />
-//                   <Route path="*" element={<Navigate to="/404" replace />} />
-//                 </Routes>
-//               </main>
-//               <Footer />
-//             </div>
-//           </StaffProvider>
-//         </CustomerProvider>
-//       </AuthProvider>
-//     </BrowserRouter>
-//   );
-// };
-
-// export default App;
-
-
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Login from "./components/AuthFunctions/logIn";
 import Signup from "./components/AuthFunctions/signUp";
 import Navbar from "./components/CommonComponents/Navbar";
+import Footer from "./components/CommonComponents/footer";
 import Users from "./components/AdminFunctions/usersManagement";
 import Staffs from "./components/AdminFunctions/staffManagement";
+import Feedback from "./components/AdminFunctions/feedbackManagement";
 import AdminDashboard from "./components/AdminFunctions/adminDashboard";
-import CustomerDashboard from "./components/CustomerFunctions/customerDashboard"
-import StaffDashboard from "./components/StaffFunctions/staffDashboard"; // Added Trainer Dashboard
+import CustomerDashboard from "./components/CustomerFunctions/customerDashboard";
+import StaffDashboard from "./components/StaffFunctions/staffDashboard";
 import Orders from "./components/AdminFunctions/ordersManagement";
 import Reservations from "./components/AdminFunctions/reservationManagement";
 import Analytic from "./components/AdminFunctions/analyticDasboard";
 import LandingPage from "./components/LandingPage";
 import Profile from "./components/CustomerFunctions/customerProfile";
 import Products from "./components/AdminFunctions/productsManagement";
-//import CustomerLogin from "./components/CustomerFunctions/customerLogin";
 import Reservation from "./components/CustomerFunctions/customerReservation";
 import Order from "./components/CustomerFunctions/customerOrders";
 import Feedbacks from "./components/CustomerFunctions/customerFeedback";
-import StaffLogin from "./components/StaffFunctions/staffLogin";
 import ViewOrders from "./components/StaffFunctions/staffOrders";
 import RecievedFeedbacks from "./components/StaffFunctions/staffFeedback";
-
+import Menu from "./components/CommonComponents/menu";
+import About from "./components/CommonComponents/about"; 
+import Cart from "./components/CommonComponents/cart";
+import Contact from "./components/CommonComponents/contact";
+import CheckoutPage from "./components/CommonComponents/checkoutPage";
+import OrderConfirmation from "./components/CheckoutSteps/orderConfirmation";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -243,111 +62,137 @@ function App() {
     return "/login";
   };
 
+  // Create a wrapper component to access the current location
+  const AppContent = () => {
+    const location = useLocation();
+    
+    const shouldShowFooter = () => {
+      // List of routes where footer should be hidden
+      const noFooterRoutes = [
+        "/adminDashboard",
+        "/customerDashboard",
+        "/staffDashboard",
+        // Add any other dashboard or admin routes where you don't want footer
+      ];
+      
+      return !noFooterRoutes.some(route => location.pathname.startsWith(route));
+    };
+
+    return (
+      <>
+        {isAuthenticated && <Navbar user={user} onLogout={handleLogout} />}
+        <div className="main-content" style={{ minHeight: "calc(100vh - 120px)" }}>
+          <Routes>
+            <Route
+              path="/"
+              element={!isAuthenticated ? <LandingPage /> : <Navigate to={getDashboardRedirect()} />}
+            />
+
+            {/* Auth Routes */}
+            <Route
+              path="/signup"
+              element={!isAuthenticated ? <Signup /> : <Navigate to={getDashboardRedirect()} />}
+            />
+            <Route
+              path="/login"
+              element={!isAuthenticated ? <Login onLogin={handleLogin} /> : <Navigate to={getDashboardRedirect()} />}
+            />
+
+            {/* Public Routes */}
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-confirmation" element={<OrderConfirmation />} />
+
+            {/* Dashboard Routes */}
+            <Route
+              path="/adminDashboard"
+              element={isAuthenticated && user?.role === "Admin" ? <AdminDashboard user={user} /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/customerDashboard"
+              element={isAuthenticated && user?.role === "Customer" ? <CustomerDashboard user={user} /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/staffDashboard"
+              element={isAuthenticated && user?.role === "Staff" ? <StaffDashboard user={user} /> : <Navigate to="/login" />}
+            />
+
+            {/* Admin Only Routes */}
+            <Route
+              path="/users"
+              element={isAuthenticated && user?.role === "Admin" ? <Users /> : <Navigate to="/adminDashboard" />}
+            />
+            <Route
+              path="/staffs"
+              element={isAuthenticated && user?.role === "Admin" ? <Staffs /> : <Navigate to="/adminDashboard" />}
+            />
+            <Route
+              path="/orders"
+              element={isAuthenticated && user?.role === "Admin" ? <Orders /> : <Navigate to="/adminDashboard" />}
+            />
+            <Route
+              path="/reservations"
+              element={isAuthenticated && user?.role === "Admin" ? <Reservations /> : <Navigate to="/adminDashboard" />}
+            />
+            <Route
+              path="/analytic"
+              element={isAuthenticated && user?.role === "Admin" ? <Analytic /> : <Navigate to="/adminDashboard" />}
+            />
+            <Route
+              path="/products"
+              element={isAuthenticated && user?.role === "Admin" ? <Products /> : <Navigate to="/adminDashboard" />}
+            />
+            <Route
+              path="/feedback"
+              element={isAuthenticated && user?.role === "Admin" ? <Feedback /> : <Navigate to="/adminDashboard" />}
+            />
+            
+            {/* Customer Only Routes */}
+            <Route
+              path="/profile"
+              element={isAuthenticated && user?.role === "Customer" ? <Profile /> : <Navigate to="/customerDashboard" />}
+            />
+            <Route
+              path="/order"
+              element={isAuthenticated && user?.role === "Customer" ? <Order /> : <Navigate to="/customerDashboard" />}
+            />
+            <Route
+              path="/reservation"
+              element={isAuthenticated && user?.role === "Customer" ? <Reservation /> : <Navigate to="/customerDashboard" />}
+            />
+            <Route
+              path="/feedbacks"
+              element={isAuthenticated && user?.role === "Customer" ? <Feedbacks /> : <Navigate to="/customerDashboard" />}
+            />
+          
+            {/* Staff Only Routes */}
+            <Route
+              path="/view-orders"
+              element={isAuthenticated && user?.role === "Staff" ? <ViewOrders /> : <Navigate to="/staffDashboard" />}
+            />
+            <Route
+              path="/received-feedback"
+              element={isAuthenticated && user?.role === "Staff" ? <RecievedFeedbacks /> : <Navigate to="/staffDashboard" />}
+            />
+
+            {/* Catch-all Route */}
+            <Route
+              path="*"
+              element={!isAuthenticated ? <Navigate to="/login" /> : <Navigate to={getDashboardRedirect()} />}
+            />
+          </Routes>
+        </div>
+        {shouldShowFooter() && <Footer />}
+      </>
+    );
+  };
+
   return (
     <BrowserRouter>
-      {isAuthenticated && <Navbar user={user} onLogout={handleLogout} />}
-      <Routes>
-        <Route
-          path="/"
-          element={!isAuthenticated ? <LandingPage /> : <Navigate to={getDashboardRedirect()} />}
-        />
-
-        {/* Auth Routes */}
-        <Route
-          path="/signup"
-          element={!isAuthenticated ? <Signup /> : <Navigate to={getDashboardRedirect()} />}
-        />
-        <Route
-          path="/login"
-          element={!isAuthenticated ? <Login onLogin={handleLogin} /> : <Navigate to={getDashboardRedirect()} />}
-        />
-
-        {/* Dashboard Routes */}
-        <Route
-          path="/adminDashboard"
-          element={isAuthenticated && user?.role === "Admin" ? <AdminDashboard user={user} /> : <Navigate to="/adminDashboard" />}
-        />
-        <Route
-          path="/customerDashboard"
-          element={isAuthenticated && user?.role === "Customer" ? <CustomerDashboard user={user} /> : <Navigate to="/customerDashboard" />}
-        />
-        <Route
-          path="/staffDashboard"
-          element={isAuthenticated && user?.role === "Staff" ? <StaffDashboard user={user} /> : <Navigate to="/login" />}
-        />
-
-        {/* Admin Only Routes */}
-      
-        <Route
-          path="users"
-          element={isAuthenticated && user?.role === "Admin" ? <Users /> : <Navigate to="/adminDashboard" />}
-        />
-        <Route
-          path="staffs"
-          element={isAuthenticated && user?.role === "Admin" ? <Staffs /> : <Navigate to="/adminDashboard" />}
-        />
-        <Route
-          path="orders"
-          element={isAuthenticated && user?.role === "Admin" ? <Orders /> : <Navigate to="/adminDashboard" />}
-        />
-        <Route
-          path="reservations"
-          element={isAuthenticated && user?.role === "Admin" ? <Reservations /> : <Navigate to="/adminDashboard" />}
-        />
-        <Route
-          path="analytic"
-          element={isAuthenticated && user?.role === "Admin" ? <Analytic /> : <Navigate to="/adminDashboard" />}
-        />
-        <Route
-          path="products"
-          element={isAuthenticated && user?.role === "Admin" ? <Products/> : <Navigate to="/adminDashboard" />}
-        />
-       
-
-        {/* Customer Only Routes */}
-        {/* <Route
-          path="/customer-login"
-          element={isAuthenticated && user?.role === "Customer" ? <CustomerLogin /> : <Navigate to="/customerDashboard" />}
-        /> */}
-        <Route
-          path="/profile"
-          element={isAuthenticated && user?.role === "Customer" ? <Profile/> : <Navigate to="/customerDashboard" />}
-        />
-        <Route
-          path="/order"
-          element={isAuthenticated && user?.role === "Customer" ? <Order  /> : <Navigate to="/customerDashboard" />}
-        />
-         <Route
-          path="/reservation"
-          element={isAuthenticated && user?.role === "Customer" ? <Reservation /> : <Navigate to="/customerDashboard" />}
-        />
-        <Route
-          path="/feedbacks"
-          element={isAuthenticated && user?.role === "Customer" ? <Feedbacks /> : <Navigate to="/customerDashboard" />}
-        />
-      
-       {/* Staff Only Routes */}
-       
-      <Route
-          path="/staff-login"
-          element={isAuthenticated && user?.role === "Staff" ? <StaffLogin /> : <Navigate to="/staffDashboard" />}
-        />
-         <Route
-          path="/view-orders"
-          element={isAuthenticated && user?.role === "Staff" ? <ViewOrders /> : <Navigate to="/staffDashboard" />}
-        />
-        <Route
-          path="/recieved-feedbacks"
-          element={isAuthenticated && user?.role === "Staff" ? <RecievedFeedbacks /> : <Navigate to="/staffDashboard" />}
-          />
-          
-
-        {/* Catch-all Route */}
-        <Route
-          path="*"
-          element={!isAuthenticated ? <Navigate to="/login" /> : <Navigate to={getDashboardRedirect()} />}
-        />
-      </Routes>
+      <AppContent />
     </BrowserRouter>
   );
 }

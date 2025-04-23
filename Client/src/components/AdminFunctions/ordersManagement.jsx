@@ -5,7 +5,7 @@ const OrdersList = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -65,7 +65,7 @@ const OrdersList = () => {
             {orders.map(order => (
               <tr key={order._id}>
                 <td>{order._id.substring(18)}</td>
-                <td>{order.customerId?.name || 'N/A'}</td>
+                <td>{order.customerName}</td>
                 <td>{order.staffId?.name || 'N/A'}</td>
                 <td>{order.orderType}</td>
                 <td>${order.totalAmount?.toFixed(2) || '0.00'}</td>

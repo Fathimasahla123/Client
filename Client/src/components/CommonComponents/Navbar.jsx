@@ -22,7 +22,7 @@ const Navbar = ({ user, onLogout, cartItemCount = 0 }) => {
 
   // Admin links
   const adminLinks = [
-    { to: "/adminDashboard", text: "Dashboard" },
+    { to: "/adminDashboard", text: "Home" },
     { to: "/users", text: "Users" },
     { to: "/orders", text: "Orders" },
     { to: "/reservations", text: "Reservations" },
@@ -34,6 +34,7 @@ const Navbar = ({ user, onLogout, cartItemCount = 0 }) => {
 
   // Staff links
   const staffLinks = [
+    { to: "/staffDashboard", text: "Home" },
     { to: "/view-orders", text: "View Orders" },
     { to: "/received-feedback", text: "Feedback & Ratings" }
   ];

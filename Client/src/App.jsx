@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Login from "./components/AuthFunctions/Login";
-import Signup from "./components/AuthFunctions/Signup";
+import Login from "./components/authFunctions/logIn";
+import Signup from "./components/authFunctions/signUp";
 import Navbar from "./components/CommonComponents/Navbar";
 import Footer from "./components/CommonComponents/footer";
 import Users from "./components/AdminFunctions/usersManagement";
@@ -22,9 +22,9 @@ import Feedbacks from "./components/CustomerFunctions/customerFeedback";
 import ViewOrders from "./components/StaffFunctions/staffOrders";
 import RecievedFeedbacks from "./components/StaffFunctions/staffFeedback";
 import Menu from "./components/CommonComponents/menu";
-import About from "./components/CommonComponents/About"; 
-import Cart from "./components/CommonComponents/Cart";
-import Contact from "./components/CommonComponents/Contact";
+import About from "./components/CommonComponents/about"; 
+import Cart from "./components/CommonComponents/cart";
+import Contact from "./components/CommonComponents/contact";
 import CheckoutPage from "./components/CommonComponents/checkoutPage";
 import OrderConfirmation from "./components/CheckoutSteps/orderConfirmation";
 

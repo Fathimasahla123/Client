@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Login from "./components/AuthFunctions/logIn";
-import Signup from "./components/AuthFunctions/signUp";
+import Login from "./components/AuthFunctions/login";
+import Signup from "./components/AuthFunctions/signup";
 import Navbar from "./components/CommonComponents/Navbar";
 import Footer from "./components/CommonComponents/footer";
 import Users from "./components/AdminFunctions/usersManagement";

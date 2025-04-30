@@ -100,8 +100,7 @@ const Signup = () => {
       pauseOnHover: true,
       draggable: true,
     });
-    // In a real app, you would redirect to your backend auth endpoint
-    // window.location.href = `${apiUrl}/api/auth/${provider}`
+    
   };
 
   return (
@@ -206,7 +205,6 @@ const Signup = () => {
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
                 >
                   <option value="Customer">Customer</option>
-                  <option value="Admin">Admin</option>
                   <option value="Staff">Staff</option>
                 </select>
               </div>

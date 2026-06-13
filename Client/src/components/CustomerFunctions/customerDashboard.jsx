@@ -1,10 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function CustomerDashboard({ user }) {
   const navigate = useNavigate();
+  const [currentImage, setCurrentImage] = useState(0);
+  const [transition, setTransition] = useState(true);
+
+  const images = [
+    "https://media.istockphoto.com/id/95339953/photo/close-up-of-a-fresh-pizza-being-served.jpg?s=612x612&w=0&k=20&c=cPG856iu3ryPk4PPBd6yQnLJ8hdyHboypUkjr3OMfQo=",
+    "https://paradisegrillsdirect.com/wp-content/uploads/2023/08/SummerSizzleChicken.png",
+    "https://thecozycook.com/wp-content/uploads/2022/06/Creamy-Herb-Pasta-2.jpg",
+    "https://png.pngtree.com/thumb_back/fh260/background/20251012/pngtree-towering-double-cheeseburger-with-melted-cheddar-and-veggies-image_19829481.webp",
+  ];
+
+  const sliderImages = [...images, images[0]];
   // Restaurant photos gallery
+
   const restaurantPhotos = [
     {
       id: 1,
@@ -66,47 +79,86 @@ function CustomerDashboard({ user }) {
     navigate("/menu");
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => {
+        if (prev === images.length) return 0;
+        return prev + 1;
+      });
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (currentImage === images.length) {
+      setTimeout(() => {
+        setTransition(false);
+        setCurrentImage(0);
+      }, 1000);
+
+      setTimeout(() => {
+        setTransition(true);
+      }, 1050);
+    }
+  }, [currentImage]);
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with Background Image */}
-      <div className="relative h-screen">
+      <div className="relative h-screen overflow-hidden">
+        {/* Slider */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className={`flex ${transition ? "transition-transform duration-1000 ease-in-out" : ""}`}
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80')",
-            filter: "blur(4px)",
+            width: `${sliderImages.length * 100}vw`,
+            transform: `translateX(-${currentImage * 100}vw)`,
           }}
-        ></div>
-        <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
+        >
+          {sliderImages.map((img, index) => (
+            <div
+              key={index}
+              className="w-screen h-screen bg-cover bg-center shrink-0 relative"
+              style={{
+                backgroundImage: `url(${img})`,
+              }}
+            >
+              <div className="absolute inset-0 bg-black/60"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* HERO CONTENT (kept same, just overlay) */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-4">
           <div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              WELCOME TO{" "}
+              WELCOME TO
             </h1>
             <h1 className="text-4xl md:text-6xl font-bold text-amber-500 mb-6">
-              EATOS{" "}
+              EATOS
             </h1>
 
-            <p className="text-xl text-white mb-8 font-light tracking-wider italic">
+            <p className="text-xl text-white mb-8 font-light italic">
               " Where Every Bite Tells a Story "
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+
+            <div className="flex gap-4 justify-center">
               <Link
                 to="/menu"
-                className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-lg text-lg font-medium"
+                className="bg-amber-600 px-6 py-3 rounded-lg text-white"
               >
-                View Our Menu
+                View Menu
               </Link>
               <Link
                 to="/reservation"
-                className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-lg text-lg font-medium"
+                className="border px-6 py-3 rounded-lg text-white"
               >
-                Book a Table
+                Book Table
               </Link>
             </div>
           </div>
         </div>
       </div>
+
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">

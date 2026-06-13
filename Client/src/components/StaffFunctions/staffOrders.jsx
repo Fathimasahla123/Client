@@ -16,7 +16,7 @@ const StaffOrders = () => {
   const [expandedOrder, setExpandedOrder] = useState(null);
 
   const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+  const apiUrl = import.meta.env.VITE_API_URL ;
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -84,7 +84,7 @@ const StaffOrders = () => {
         <div className="max-w-7xl mx-auto">
           <div className="bg-red-50 border-l-4 border-red-500 p-4">
             <div className="flex">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-5 w-5 text-red-500"
                   xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +181,7 @@ const StaffOrders = () => {
                           {/* Customer Info */}
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
-                              <div className="flex-shrink-0 h-10 w-10 bg-amber-100 rounded-full flex items-center justify-center">
+                              <div className="shrink-0 h-10 w-10 bg-amber-100 rounded-full flex items-center justify-center">
                                 <span className="text-amber-700 font-medium">
                                   {order.Customer?.name?.charAt(0) || "C"}
                                 </span>
@@ -385,7 +385,7 @@ const StaffOrders = () => {
                   <button
                     key={page}
                     onClick={() => handlePageChange(page)}
-                    className={`min-w-[40px] h-10 rounded-lg flex items-center justify-center text-sm ${
+                    className={`min-w-10 h-10 rounded-lg flex items-center justify-center text-sm ${
                       pagination.currentPage === page
                         ? "bg-amber-500 text-white font-bold"
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"

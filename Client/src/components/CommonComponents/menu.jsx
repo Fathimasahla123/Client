@@ -16,7 +16,7 @@ const Menu = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+        const apiUrl = import.meta.env.VITE_API_URL ;
         const token = localStorage.getItem("token");
         if (!token) {
           throw new Error("Authentication token not found");

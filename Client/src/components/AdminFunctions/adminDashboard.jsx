@@ -20,7 +20,7 @@ function AdminDashboard({ user }) {
                 <span className="text-amber-500">EATOS</span> Admin {user.name}
               </h1> */}
               <h1 className="text-4xl font-bold text-amber-500 mb-4">
-            Welcome, Admin{user.name.split(' ')[0]}!
+            Welcome, {user.name.split(' ')[0]}!
           </h1>
               <p className="text-white">Restaurant Management System</p>
             </div>
@@ -36,7 +36,7 @@ function AdminDashboard({ user }) {
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Welcome Card with Restaurant Image */}
         <div className="relative rounded-xl overflow-hidden shadow-lg mb-8">
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-transparent opacity-90"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-gray-900 to-transparent opacity-90"></div>
           <img
             className="w-full h-64 object-cover"
             src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80"
@@ -324,7 +324,7 @@ function AdminDashboard({ user }) {
           alt={item.name}
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-gray-900 to-transparent opacity-70"></div>
         <div className="absolute bottom-0 left-0 p-4">
           <h4 className="text-xl font-bold text-white">{item.name}</h4>
           <p className="text-amber-300">{item.orders} orders this week</p>

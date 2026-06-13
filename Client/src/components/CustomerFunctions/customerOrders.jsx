@@ -25,7 +25,7 @@ const Order = () => {
   const [staffMembers, setStaffMembers] = useState([]);
 
   const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+  const apiUrl = import.meta.env.VITE_API_URL ;
   const token = localStorage.getItem("token");
   useEffect(() => {
     const fetchProducts = async () => {
@@ -219,7 +219,7 @@ const Order = () => {
         <div className="max-w-4xl mx-auto">
           <div className="bg-red-50 border-l-4 border-red-500 p-4">
             <div className="flex">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-5 w-5 text-red-500"
                   xmlns="http://www.w3.org/2000/svg"

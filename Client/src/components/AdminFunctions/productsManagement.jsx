@@ -27,7 +27,7 @@ const ProductsManagement = () => {
 
   const fetchProducts = async () => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL;
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -81,7 +81,7 @@ const ProductsManagement = () => {
     setImageUploading(true);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
       const uploadedImages = [];
 
@@ -192,7 +192,7 @@ const ProductsManagement = () => {
         );
       }
 
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
 
       // Create submit data with merged category
@@ -231,7 +231,7 @@ const ProductsManagement = () => {
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
 
       const finalCategory =
@@ -267,7 +267,7 @@ const ProductsManagement = () => {
     }
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
 
       const response = await axios.delete(
@@ -321,7 +321,7 @@ const ProductsManagement = () => {
         <div className="max-w-7xl mx-auto">
           <div className="bg-red-50 border-l-4 border-red-500 p-4">
             <div className="flex">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-5 w-5 text-red-500"
                   xmlns="http://www.w3.org/2000/svg"

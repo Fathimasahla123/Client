@@ -13,7 +13,7 @@ const ReservationsList = () => {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+        const apiUrl = import.meta.env.VITE_API_URL;
         const token = localStorage.getItem("token");
 
         if (!token) {
@@ -31,16 +31,6 @@ const ReservationsList = () => {
 
         setReservations(response.data.reservation || response.data);
         setLoading(false);
-        toast.success("Reservations loaded successfully!", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
       } catch (err) {
         setLoading(false);
         toast.error(err.message || "Failed to load reservations", {
@@ -73,7 +63,7 @@ const ReservationsList = () => {
   const handleStatusUpdate = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
 
       await axios.put(
@@ -109,7 +99,7 @@ const ReservationsList = () => {
   const deleteReservation = async (id) => {
     if (window.confirm("Are you sure you want to delete this reservation?")) {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+        const apiUrl = import.meta.env.VITE_API_URL ;
         const token = localStorage.getItem("token");
 
         await axios.delete(`${apiUrl}/api/admin/delete-reservation/${id}`, {
@@ -143,7 +133,7 @@ const ReservationsList = () => {
         <div className="max-w-7xl mx-auto">
           <div className="bg-red-50 border-l-4 border-red-500 p-4">
             <div className="flex">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-5 w-5 text-red-500"
                   xmlns="http://www.w3.org/2000/svg"

@@ -21,7 +21,7 @@ const UsersManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
 
       const response = await axios.get(`${apiUrl}/api/admin/list-users`, {
@@ -58,7 +58,7 @@ const UsersManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
 
       await axios.post(
@@ -123,7 +123,7 @@ const UsersManagement = () => {
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL ;
       const token = localStorage.getItem("token");
       await axios.put(
         `${apiUrl}/api/admin/update-user/${editUser._id}`,
@@ -161,7 +161,7 @@ const UsersManagement = () => {
   const deleteUser = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+        const apiUrl = import.meta.env.VITE_API_URL  ;
         const token = localStorage.getItem("token");
 
         // Use axios.delete() for DELETE requests
@@ -226,7 +226,7 @@ const UsersManagement = () => {
         <div className="max-w-7xl mx-auto">
           <div className="bg-red-50 border-l-4 border-red-500 p-4">
             <div className="flex">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-5 w-5 text-red-500"
                   xmlns="http://www.w3.org/2000/svg"

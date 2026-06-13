@@ -54,7 +54,7 @@ const Signup = () => {
 
     try {
       setIsLoading(true);
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const apiUrl = import.meta.env.VITE_API_URL;
       const response = await axios.post(`${apiUrl}/api/auth/signup`, formData);
 
       if (response.data.success) {

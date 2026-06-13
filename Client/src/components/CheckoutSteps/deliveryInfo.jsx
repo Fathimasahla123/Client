@@ -75,7 +75,7 @@ const DeliveryInfo = ({ formData, handleChange, nextStep, prevStep, orderType })
         ) : (
           <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
             <h3 className="font-medium text-amber-800">Pickup Location</h3>
-            <p className="mt-2 text-amber-700">123 Restaurant Row, Foodie City, FC 12345</p>
+            <p className="mt-2 text-amber-700">EATOS Restaurant, Foodie City, FC 12345</p>
             <p className="mt-1 text-sm text-amber-600">Please bring your order confirmation when picking up.</p>
           </div>
         )}
